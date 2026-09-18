@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: PHP ${{ matrix.php }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        php: ['8.3', '8.4', '8.5']
+        include:
+          - os: windows-latest
+            php: '8.4'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: shivammathur/setup-php@b604ade2a87db23f8871b7182e69ec5e75effb45 # v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, dom, filter, zlib
+          coverage: none
+          tools: composer:v2
+      - name: Validate metadata
+        run: composer validate --strict
+      - name: Check syntax
+        run: |
+          find src tests examples -name '*.php' -print0 | xargs -0 -n 1 php -l
+          php -l bin/sitemap-scout
+      - name: Run unit and local HTTP integration tests
+        run: php tests/run.php
