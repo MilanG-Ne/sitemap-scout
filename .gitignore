@@ -1,0 +1,6 @@
+/vendor/
+/work/
+/composer.lock
+.env
+.env.*
+/report.json

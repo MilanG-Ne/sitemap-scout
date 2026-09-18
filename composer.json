@@ -1,0 +1,16 @@
+{
+    "name": "milang-ne/sitemap-scout",
+    "description": "A small, origin-scoped sitemap health checker for the terminal and CI.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.3",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-filter": "*",
+        "ext-zlib": "*"
+    },
+    "autoload": { "psr-4": { "SitemapScout\\": "src/" } },
+    "bin": ["bin/sitemap-scout"],
+    "scripts": { "test": "@php tests/run.php" }
+}
