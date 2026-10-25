@@ -126,3 +126,5 @@ The native-PHP test runner covers pure parsing and scan decisions with a fake HT
 `HttpClient` is the only I/O seam in the scanner. `CurlClient` owns TLS, timeouts, pacing, and transfer limits; `SitemapParser` handles bounded XML; `Scanner` owns traversal and health decisions; `Application` handles arguments and output. No third-party PHP packages are required. Composer metadata is provided but installation is optional.
 
 Issues and focused pull requests are welcome. Include a small fictional sitemap or local fixture for regression cases. License: [MIT](LICENSE).
+
+Built by [Milan Georgijevic](https://ivig.dev/about/) at [iviG Technical SEO](https://ivig.dev/). Web version: [Sitemap Scout](https://ivig.dev/sitemap-scout/).
